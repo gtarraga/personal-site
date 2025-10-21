@@ -1,0 +1,70 @@
+name: Deploy to VPS
+
+on:
+  # Allow this workflow to be called by other workflows
+  workflow_call:
+    secrets:
+      TS_OAUTH_CLIENT_ID:
+        required: true
+      TS_OAUTH_SECRET:
+        required: true
+      VPS_HOST:
+        required: true
+      VPS_USER:
+        required: true
+      VPS_PATH:
+        required: true
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Tailscale
+        uses: tailscale/github-action@v4
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+
+      - name: Deploy to VPS
+        shell: bash
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          VPS_PATH: ${{ secrets.VPS_PATH }}
+          IMAGE_NAME: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        run: |
+          # Deploy to VPS
+          ssh -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST bash << ENDSSH
+            set -e
+            
+            # Navigate to app directory
+            cd $VPS_PATH
+            
+            # Login to GitHub Container Registry
+            echo "$GITHUB_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+            
+            # Pull latest image 
+            docker compose pull 
+
+            # Recreate and restart services
+            docker compose up -d --force-recreate
+            
+            # Cleanup old images to save space
+            docker image prune -af --filter "until=24h"
+            
+            # Show running containers
+            docker compose ps
+            
+            echo "✅ Successfully deployed: $IMAGE_NAME:latest"
+          ENDSSH
