@@ -18,10 +18,28 @@ import Layout from '../layouts/Layout.astro';
 		<hr>
 
 		<p class="section-label">list of things i've worked on</p>
-		<ul>
-			<li>a paella event for engineers</li>
-			<li>a <a href="https://papers.gtarraga.com" target="_blank">paper reading club</a></li>
-		</ul>
+		<div class="projects">
+			<div class="project">
+				<div class="project-info">
+					<span class="project-name">KV Store</span>
+					<span class="project-tag">Fun weekend project</span>
+				</div>
+				<a href="https://github.com/gtarraga/kv-store" target="_blank" class="project-stars">repo↗</a>
+			</div>
+			<div class="project">
+				<div class="project-info">
+					<span class="project-name">Paella for Engineers</span>
+					<span class="project-tag">Community event</span>
+				</div>
+				<span class="project-stars">30+ attendees</span>
+			</div>
+			<div class="project">
+				<div class="project-info">
+					<span class="project-name">Paper Reading Club</span>
+					<span class="project-tag">Side project</span>
+				</div>
+				<span class="project-stars">6 sessions</span>
+			</div>
+		</div>
 	</div>
 </Layout>
-
