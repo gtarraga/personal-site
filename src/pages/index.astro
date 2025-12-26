@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getRecentMedia } from '../lib/shelf';
+
+const shelfItems = await getRecentMedia(2, 2);
 ---
 
 <Layout title="guillem tarraga">
@@ -39,6 +42,33 @@ import Layout from '../layouts/Layout.astro';
 					<span class="project-tag">Side project</span>
 				</div>
 				<span class="project-stars">6 sessions</span>
+			</div>
+		</div>
+
+
+
+
+		<div class="side-by-side">
+			<div class="shelf-section">
+				<p class="section-label">media shelf</p>
+				<div class="media-grid">
+					{shelfItems.map((item) => (
+						<a href={item.url} target="_blank" class={`media-item media-${item.type}`}>
+							<img src={item.imageUrl} alt={item.title} />
+						</a>
+					))}
+				</div>
+				<div class="shelf-link"><a href="/shelf" >view full shelf →</a></div>
+			</div>
+			<div class="rabbit-holes-section">
+				<p class="section-label">current rabbit holes</p>
+				<ul class="rabbit-holes-list">
+					<li>Distributed systems</li>
+					<li>China (history/geopolitics)</li>
+					<li>Devops</li>
+					<li>Semicon industry</li>
+					<li>Lamps</li>
+				</ul>
 			</div>
 		</div>
 	</div>

@@ -3,6 +3,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches: [main]
+  schedule:
+    # Rebuild daily at 6am UTC to fetch fresh RSS data
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Allow manual triggers
 
 jobs:
   build:
