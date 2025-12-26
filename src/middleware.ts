@@ -3,6 +3,11 @@ import { defineMiddleware } from "astro:middleware";
 export const onRequest = defineMiddleware(async (context, next) => {
   const { pathname } = context.url;
 
+  // Skip PostHog proxy in dev environment
+  if (import.meta.env.DEV && pathname.startsWith("/relay/")) {
+    return new Response(null, { status: 204 });
+  }
+
   // Proxy requests to PostHog static assets
   if (pathname.startsWith("/relay/static/")) {
     const path = pathname.replace("/relay/static/", "");

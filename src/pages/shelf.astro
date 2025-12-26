@@ -134,7 +134,6 @@ const shelfItems = await getShelfItems();
 		flex-direction: column;
 		text-decoration: none;
 		color: inherit;
-		border-radius: 4px;
 		transition: transform 0.2s ease, opacity 0.3s ease;
 	}
 
@@ -173,8 +172,8 @@ const shelfItems = await getShelfItems();
 		display: block;
 		width: 100%;
 		aspect-ratio: 2/3;
-		object-fit: cover;
-		background-color: var(--muted-bg);
+		object-fit: contain;
+		object-position: left;
 	}
 
 	.shelf-item-info {
