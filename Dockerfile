@@ -11,9 +11,11 @@ FROM base AS build
 RUN pnpm install --frozen-lockfile
 COPY . .
 RUN pnpm run build
+RUN pnpm prune --prod
 
 FROM node:lts-alpine AS runtime
 WORKDIR /app
+COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/server.mjs ./server.mjs
 COPY --from=build /app/scripts ./scripts
