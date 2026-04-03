@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { getShelfItems } from '../lib/shelf';
 
-const shelfItems = await getShelfItems();
+const shelfItems = getShelfItems();
 ---
 
 <Layout title="media shelf - guillem tarraga">
@@ -16,7 +16,7 @@ const shelfItems = await getShelfItems();
 			</div>
 		</div>
 
-		<div class="shelf-grid">
+		<div class="shelf-grid" data-shelf-page>
 			{shelfItems.map((item) => (
 				<a href={item.url} target="_blank" class={`shelf-item media-${item.type}`} data-type={item.type}>
 					<div class="shelf-item-cover">
@@ -30,38 +30,52 @@ const shelfItems = await getShelfItems();
 			))}
 		</div>
 	</div>
+	<script>
+		import { hydrateShelf } from '../lib/shelf-client';
+
+		hydrateShelf();
+	</script>
 </Layout>
 
 <script>
 	const filters = document.querySelectorAll('.legend-item');
-	const items = document.querySelectorAll('.shelf-item');
 	let activeFilter: string | null = null;
+
+	const syncShelfFilter = () => {
+		const items = document.querySelectorAll('.shelf-item');
+
+		if (!activeFilter) {
+			items.forEach(item => item.classList.remove('hidden'));
+			return;
+		}
+
+		items.forEach(item => {
+			if (item.getAttribute('data-type') === activeFilter) {
+				item.classList.remove('hidden');
+			} else {
+				item.classList.add('hidden');
+			}
+		});
+	};
 
 	filters.forEach(filter => {
 		filter.addEventListener('click', () => {
 			const type = filter.getAttribute('data-filter');
 
 			if (activeFilter === type) {
-				// Deactivate if clicking the same filter
 				activeFilter = null;
 				filters.forEach(f => f.classList.remove('active'));
-				items.forEach(item => item.classList.remove('hidden'));
 			} else {
-				// Activate new filter
 				activeFilter = type;
 				filters.forEach(f => f.classList.remove('active'));
 				filter.classList.add('active');
-
-				items.forEach(item => {
-					if (item.getAttribute('data-type') === type) {
-						item.classList.remove('hidden');
-					} else {
-						item.classList.add('hidden');
-					}
-				});
 			}
+
+			syncShelfFilter();
 		});
 	});
+
+	document.addEventListener('shelf:updated', syncShelfFilter);
 </script>
 
 <style>
