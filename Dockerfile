@@ -12,7 +12,10 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 RUN pnpm run build
 
-FROM nginx:alpine AS runtime
-COPY --from=build /app/dist /usr/share/nginx/html
+FROM node:lts-alpine AS runtime
+WORKDIR /app
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/server.mjs ./server.mjs
+COPY --from=build /app/scripts ./scripts
 EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["node", "server.mjs"]

@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { getRecentMedia } from '../lib/shelf';
 
-const shelfItems = await getRecentMedia(2, 2);
+const shelfItems = getRecentMedia(2, 2);
 ---
 
 <Layout title="guillem tarraga">
@@ -51,7 +51,7 @@ const shelfItems = await getRecentMedia(2, 2);
 		<div class="side-by-side">
 			<div class="shelf-section">
 				<p class="section-label">media shelf</p>
-				<div class="media-grid">
+				<div class="media-grid" data-shelf-home data-film-count="2" data-book-count="2">
 					{shelfItems.map((item) => (
 						<a href={item.url} target="_blank" class={`media-item media-${item.type}`}>
 							<img src={item.imageUrl} alt={item.title} />
@@ -73,4 +73,9 @@ const shelfItems = await getRecentMedia(2, 2);
 			</div>
 		</div>
 	</div>
+	<script>
+		import { hydrateShelf } from '../lib/shelf-client';
+
+		hydrateShelf();
+	</script>
 </Layout>
