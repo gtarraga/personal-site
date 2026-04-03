@@ -11,6 +11,11 @@ const shelfItems = getShelfItems();
 		<div class="shelf-header">
 			<p>Books and films I've recently enjoyed.</p>
 			<div class="legend">
+				<span class="legend-filter-icon" aria-hidden="true">
+					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
+						<path fill="currentColor" d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" />
+					</svg>
+				</span>
 				<span class="legend-item legend-film" data-filter="film">Films</span>
 				<span class="legend-item legend-book" data-filter="book">Books</span>
 			</div>
@@ -91,15 +96,33 @@ const shelfItems = getShelfItems();
 	}
 
 	.legend {
+		display: flex;
+		align-items: center;
+		gap: 12px;
 		font-size: 0.75rem;
 		color: #737373;
 		margin-left: 8px;
 		white-space: nowrap;
 	}
 
+	.legend-filter-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		line-height: 0;
+		color: #737373;
+		margin-right: -4px;
+	}
+
+	.legend-filter-icon svg {
+		display: block;
+		/* funnel glyph reads top-heavy in 24×24; nudge to align with label cap height */
+		transform: translateY(0.08em);
+	}
+
 	.legend-item {
 		cursor: pointer;
-		margin-right: 12px;
 		transition: color 0.2s, text-decoration 0.2s;
 	}
 
