@@ -1,7 +1,6 @@
 name: Deploy to VPS
 
 on:
-  # Allow this workflow to be called by other workflows
   workflow_call:
     secrets:
       TS_OAUTH_CLIENT_ID:
@@ -14,6 +13,8 @@ on:
         required: true
       VPS_PATH:
         required: true
+
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
