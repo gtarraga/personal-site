@@ -11,6 +11,7 @@ const port = Number.parseInt(process.env.PORT || "8080", 10);
 
 const POSTHOG_ASSETS_HOST = "https://eu-assets.i.posthog.com";
 const POSTHOG_API_HOST = "https://eu.i.posthog.com";
+const PROXY_TIMEOUT_MS = 8000;
 const HOP_BY_HOP_HEADERS = new Set([
   "connection",
   "keep-alive",
@@ -23,6 +24,15 @@ const HOP_BY_HOP_HEADERS = new Set([
   "host",
   "content-length",
 ]);
+
+function readRequestBody(request) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    request.on("data", (chunk) => chunks.push(chunk));
+    request.on("end", () => resolve(Buffer.concat(chunks)));
+    request.on("error", reject);
+  });
+}
 
 try {
   const snapshot = await refreshShelfFile(path.join(distDir, "shelf.json"));
@@ -48,10 +58,14 @@ async function proxyRelay(request, response) {
     }
   }
 
-  const init = { method: request.method, headers: upstreamHeaders };
+  const init = {
+    method: request.method,
+    headers: upstreamHeaders,
+    signal: AbortSignal.timeout(PROXY_TIMEOUT_MS),
+  };
   if (request.method !== "GET" && request.method !== "HEAD") {
-    init.body = Readable.toWeb(request);
-    init.duplex = "half";
+    const body = await readRequestBody(request);
+    if (body.length > 0) init.body = body;
   }
 
   try {
