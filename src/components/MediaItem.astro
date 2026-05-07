@@ -1,0 +1,13 @@
+---
+import type { MediaItem } from '../lib/shelf-contract';
+
+interface Props {
+	item: MediaItem;
+}
+
+const { item } = Astro.props;
+---
+
+<a href={item.url} target="_blank" class={`media-item media-${item.type}`}>
+	<img src={item.imageUrl} alt={item.title} />
+</a>

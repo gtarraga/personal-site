@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import MediaItem from '../components/MediaItem.astro';
 import { getRecentMedia } from '../lib/shelf';
 
 const shelfItems = getRecentMedia(2, 2);
@@ -59,11 +60,7 @@ const shelfItems = getRecentMedia(2, 2);
 			<div class="shelf-section">
 				<p class="section-label">media shelf</p>
 				<div class="media-grid" data-shelf-home data-film-count="2" data-book-count="2">
-					{shelfItems.map((item) => (
-						<a href={item.url} target="_blank" class={`media-item media-${item.type}`}>
-							<img src={item.imageUrl} alt={item.title} />
-						</a>
-					))}
+					{shelfItems.map((item) => <MediaItem item={item} />)}
 				</div>
 				<div class="shelf-link"><a href="/shelf" >view full shelf →</a></div>
 			</div>

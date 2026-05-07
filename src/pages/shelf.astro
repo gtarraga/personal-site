@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ShelfItem from '../components/ShelfItem.astro';
 import { getShelfItems } from '../lib/shelf';
 
 const shelfItems = getShelfItems();
@@ -22,17 +23,7 @@ const shelfItems = getShelfItems();
 		</div>
 
 		<div class="shelf-grid" data-shelf-page>
-			{shelfItems.map((item) => (
-				<a href={item.url} target="_blank" class={`shelf-item media-${item.type}`} data-type={item.type}>
-					<div class="shelf-item-cover">
-						<img src={item.imageUrl} alt={item.title} />
-					</div>
-					<div class="shelf-item-info">
-						<span class="shelf-item-title">{item.title}</span>
-						{item.year && <span class="shelf-item-year">{item.year}</span>}
-					</div>
-				</a>
-			))}
+			{shelfItems.map((item) => <ShelfItem item={item} />)}
 		</div>
 	</div>
 	<script>
