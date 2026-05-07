@@ -1,5 +1,7 @@
 import { defineMiddleware } from "astro:middleware";
 
+const PROXY_TIMEOUT_MS = 8000;
+
 export const onRequest = defineMiddleware(async (context, next) => {
   const { pathname } = context.url;
 
@@ -14,7 +16,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
     const targetUrl = `https://eu-assets.i.posthog.com/static/${path}`;
 
     try {
-      const response = await fetch(targetUrl);
+      const response = await fetch(targetUrl, {
+        signal: AbortSignal.timeout(PROXY_TIMEOUT_MS),
+      });
 
       // Create new headers without compression-related headers
       // (fetch already decompressed the body)
@@ -47,6 +51,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
           context.request.method !== "GET" && context.request.method !== "HEAD"
             ? await context.request.clone().text()
             : undefined,
+        signal: AbortSignal.timeout(PROXY_TIMEOUT_MS),
       });
 
       // Create new headers without compression-related headers

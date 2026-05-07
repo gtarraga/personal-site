@@ -38,11 +38,14 @@ export function normalizeLetterboxdUrl(url) {
   return normalized.replace(/\/\d+\/?$/, "/");
 }
 
+const FETCH_TIMEOUT_MS = 8000;
+
 async function fetchXml(url) {
   const response = await fetch(url, {
     headers: {
       "user-agent": "gtarraga.com shelf refresh",
     },
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
   });
 
   if (!response.ok) {
