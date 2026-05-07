@@ -6,36 +6,52 @@ import {
 
 const shelfUrl = "/shelf.json";
 
-function escapeHtml(value: string): string {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
+function createMediaItem(item: MediaItem): HTMLAnchorElement {
+  const link = document.createElement("a");
+  link.href = item.url;
+  link.target = "_blank";
+  link.className = `media-item media-${item.type}`;
+
+  const img = document.createElement("img");
+  img.src = item.imageUrl;
+  img.alt = item.title;
+  link.appendChild(img);
+
+  return link;
 }
 
-function renderHomeItem(item: MediaItem): string {
-  return `
-    <a href="${escapeHtml(item.url)}" target="_blank" class="media-item media-${escapeHtml(item.type)}">
-      <img src="${escapeHtml(item.imageUrl)}" alt="${escapeHtml(item.title)}" />
-    </a>
-  `;
-}
+function createShelfItem(item: MediaItem): HTMLAnchorElement {
+  const link = document.createElement("a");
+  link.href = item.url;
+  link.target = "_blank";
+  link.className = `shelf-item media-${item.type}`;
+  link.dataset.type = item.type;
 
-function renderShelfItem(item: MediaItem): string {
-  const year = item.year ? `<span class="shelf-item-year">${item.year}</span>` : "";
+  const cover = document.createElement("div");
+  cover.className = "shelf-item-cover";
+  const img = document.createElement("img");
+  img.src = item.imageUrl;
+  img.alt = item.title;
+  cover.appendChild(img);
 
-  return `
-    <a href="${escapeHtml(item.url)}" target="_blank" class="shelf-item media-${escapeHtml(item.type)}" data-type="${escapeHtml(item.type)}">
-      <div class="shelf-item-cover">
-        <img src="${escapeHtml(item.imageUrl)}" alt="${escapeHtml(item.title)}" />
-      </div>
-      <div class="shelf-item-info">
-        <span class="shelf-item-title">${escapeHtml(item.title)}</span>
-        ${year}
-      </div>
-    </a>
-  `;
+  const info = document.createElement("div");
+  info.className = "shelf-item-info";
+  const title = document.createElement("span");
+  title.className = "shelf-item-title";
+  title.textContent = item.title;
+  info.appendChild(title);
+
+  if (item.year) {
+    const year = document.createElement("span");
+    year.className = "shelf-item-year";
+    year.textContent = String(item.year);
+    info.appendChild(year);
+  }
+
+  link.appendChild(cover);
+  link.appendChild(info);
+
+  return link;
 }
 
 async function loadShelf() {
@@ -46,6 +62,10 @@ async function loadShelf() {
   }
 
   return parseShelfSnapshot(await response.json());
+}
+
+function replaceChildren(grid: HTMLElement, children: HTMLElement[]): void {
+  grid.replaceChildren(...children);
 }
 
 function updateHome(items: MediaItem[]): void {
@@ -59,7 +79,7 @@ function updateHome(items: MediaItem[]): void {
   const bookCount = Number.parseInt(grid.dataset.bookCount || "2", 10);
   const recentItems = selectRecentMedia(items, filmCount, bookCount);
 
-  grid.innerHTML = recentItems.map(renderHomeItem).join("");
+  replaceChildren(grid, recentItems.map(createMediaItem));
 }
 
 function updateShelfPage(items: MediaItem[]): void {
@@ -69,7 +89,7 @@ function updateShelfPage(items: MediaItem[]): void {
     return;
   }
 
-  grid.innerHTML = items.map(renderShelfItem).join("");
+  replaceChildren(grid, items.map(createShelfItem));
   document.dispatchEvent(new Event("shelf:updated"));
 }
 

@@ -1,0 +1,19 @@
+---
+import type { MediaItem } from '../lib/shelf-contract';
+
+interface Props {
+	item: MediaItem;
+}
+
+const { item } = Astro.props;
+---
+
+<a href={item.url} target="_blank" class={`shelf-item media-${item.type}`} data-type={item.type}>
+	<div class="shelf-item-cover">
+		<img src={item.imageUrl} alt={item.title} />
+	</div>
+	<div class="shelf-item-info">
+		<span class="shelf-item-title">{item.title}</span>
+		{item.year && <span class="shelf-item-year">{item.year}</span>}
+	</div>
+</a>
