@@ -1,4 +1,4 @@
-FROM node:lts-alpine AS base
+FROM node:24.22.1-alpine@sha256:6a1c190e17215d844926b0677f4bf87273ff7d5e54db06d3b5b5863ab0b09a3d AS base
 COPY security/filter-emudhra.cjs /opt/security/filter-emudhra.cjs
 RUN node /opt/security/filter-emudhra.cjs
 ENV NODE_OPTIONS=--use-openssl-ca \
@@ -18,7 +18,7 @@ COPY . .
 RUN pnpm run build
 RUN pnpm prune --prod
 
-FROM node:lts-alpine AS runtime
+FROM node:24.22.1-alpine@sha256:6a1c190e17215d844926b0677f4bf87273ff7d5e54db06d3b5b5863ab0b09a3d AS runtime
 COPY security/filter-emudhra.cjs /opt/security/filter-emudhra.cjs
 RUN node /opt/security/filter-emudhra.cjs
 ENV NODE_OPTIONS=--use-openssl-ca \
