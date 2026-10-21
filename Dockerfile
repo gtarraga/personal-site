@@ -1,4 +1,9 @@
 FROM node:lts-alpine AS base
+COPY security/filter-emudhra.cjs /opt/security/filter-emudhra.cjs
+RUN node /opt/security/filter-emudhra.cjs
+ENV NODE_OPTIONS=--use-openssl-ca \
+    SSL_CERT_FILE=/patched-trust/system/ca-certificates.crt \
+    SSL_CERT_DIR=/patched-trust/system
 WORKDIR /app
 
 # Install pnpm
@@ -14,6 +19,11 @@ RUN pnpm run build
 RUN pnpm prune --prod
 
 FROM node:lts-alpine AS runtime
+COPY security/filter-emudhra.cjs /opt/security/filter-emudhra.cjs
+RUN node /opt/security/filter-emudhra.cjs
+ENV NODE_OPTIONS=--use-openssl-ca \
+    SSL_CERT_FILE=/patched-trust/system/ca-certificates.crt \
+    SSL_CERT_DIR=/patched-trust/system
 WORKDIR /app
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
