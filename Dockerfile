@@ -7,10 +7,10 @@ ENV NODE_OPTIONS=--use-openssl-ca \
 WORKDIR /app
 
 # Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@12.14.0 --activate
 
 # Copy dependency files
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 FROM base AS build
 RUN pnpm install --frozen-lockfile
