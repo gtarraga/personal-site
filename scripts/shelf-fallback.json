@@ -1,0 +1,536 @@
+{
+  "generatedAt": "2026-10-21T15:43:37.856Z",
+  "items": [
+    {
+      "title": "Star Wars",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/2/7/0/6/2706-star-wars-0-600-0-900-crop.jpg?v=f1f1271bf5",
+      "url": "https://letterboxd.com/film/star-wars/",
+      "date": "2026-10-18T00:00:00.000Z",
+      "year": 1977,
+      "rating": 4
+    },
+    {
+      "title": "Exit 8",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/1/2/9/0/7/1/8/1290718-exit-8-0-600-0-900-crop.jpg?v=583d86664f",
+      "url": "https://letterboxd.com/film/exit-8/",
+      "date": "2026-10-17T00:00:00.000Z",
+      "year": 2025,
+      "rating": 3
+    },
+    {
+      "title": "Rogue One: A Star Wars Story",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/2/5/8/1/2/8/258128-rogue-one-a-star-wars-story-0-600-0-900-crop.jpg?v=eff30d0282",
+      "url": "https://letterboxd.com/film/rogue-one-a-star-wars-story/",
+      "date": "2026-10-16T00:00:00.000Z",
+      "year": 2016,
+      "rating": 5
+    },
+    {
+      "title": "Weapons",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/9/7/2/1/0/9/972109-weapons-2025-0-600-0-900-crop.jpg?v=8100270337",
+      "url": "https://letterboxd.com/film/weapons-2025/",
+      "date": "2026-10-07T00:00:00.000Z",
+      "year": 2025,
+      "rating": 3
+    },
+    {
+      "title": "Resident Evil",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/1/3/0/2/7/1/7/1302717-untitled-resident-evil-reboot-0-600-0-900-crop.jpg?v=a688bf1bc7",
+      "url": "https://letterboxd.com/film/resident-evil-2026/",
+      "date": "2026-10-02T00:00:00.000Z",
+      "year": 2026,
+      "rating": 4
+    },
+    {
+      "title": "Nobody",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/1/1/8/6/3/6/1/1186361-nobody-2025-0-600-0-900-crop.jpg?v=0e99803270",
+      "url": "https://letterboxd.com/film/nobody-2025/",
+      "date": "2026-10-02T00:00:00.000Z",
+      "year": 2025,
+      "rating": 5
+    },
+    {
+      "title": "The Florida Project",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/3/2/8/5/3/8/328538-the-florida-project-0-600-0-900-crop.jpg?v=60e095aa65",
+      "url": "https://letterboxd.com/film/the-florida-project/",
+      "date": "2026-09-29T00:00:00.000Z",
+      "year": 2017,
+      "rating": 4
+    },
+    {
+      "title": "The Odyssey",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/1/2/5/5/3/9/4/1255394-the-odyssey-2026-0-600-0-900-crop.jpg?v=1eed046d0c",
+      "url": "https://letterboxd.com/film/the-odyssey-2026/",
+      "date": "2026-09-12T00:00:00.000Z",
+      "year": 2026,
+      "rating": 5
+    },
+    {
+      "title": "The Odyssey",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/1/2/5/5/3/9/4/1255394-the-odyssey-2026-0-600-0-900-crop.jpg?v=1eed046d0c",
+      "url": "https://letterboxd.com/film/the-odyssey-2026/",
+      "date": "2026-09-11T00:00:00.000Z",
+      "year": 2026,
+      "rating": 5
+    },
+    {
+      "title": "Memories of Murder",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/sm/upload/84/xt/e8/mw/gawnVe9cFowdoDLo9Pok12NTw39-0-600-0-900-crop.jpg?v=7cad204593",
+      "url": "https://letterboxd.com/film/memories-of-murder/",
+      "date": "2026-08-29T00:00:00.000Z",
+      "year": 2003,
+      "rating": 5
+    },
+    {
+      "title": "The Lobster",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/1/7/8/1/2/3/178123-the-lobster-0-600-0-900-crop.jpg?v=1de42bb7a6",
+      "url": "https://letterboxd.com/film/the-lobster/",
+      "date": "2026-08-26T00:00:00.000Z",
+      "year": 2015,
+      "rating": 4
+    },
+    {
+      "title": "Snatch",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/sm/upload/6p/tf/oh/ao/on9JlbGEccLsYkjeEph2Whm1DIp-0-600-0-900-crop.jpg?v=ea6fc1a2db",
+      "url": "https://letterboxd.com/film/snatch/",
+      "date": "2026-08-24T00:00:00.000Z",
+      "year": 2000,
+      "rating": 4
+    },
+    {
+      "title": "Spider-Man: Brand New Day",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/8/7/2/8/7/1/872871-spider-man-brand-new-day-0-600-0-900-crop.jpg?v=ebe6beb4fc",
+      "url": "https://letterboxd.com/film/spider-man-brand-new-day/",
+      "date": "2026-08-05T00:00:00.000Z",
+      "year": 2026,
+      "rating": 3
+    },
+    {
+      "title": "Spider-Man: No Way Home",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/5/6/0/7/8/7/560787-spider-man-no-way-home-0-600-0-900-crop.jpg?v=a336d4f40c",
+      "url": "https://letterboxd.com/film/spider-man-no-way-home/",
+      "date": "2026-08-04T00:00:00.000Z",
+      "year": 2021,
+      "rating": 2
+    },
+    {
+      "title": "Backrooms",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/9/7/6/4/1/9/976419-backrooms-2026-0-600-0-900-crop.jpg?v=f7a99e3fc8",
+      "url": "https://letterboxd.com/film/backrooms-2026/",
+      "date": "2026-07-13T00:00:00.000Z",
+      "year": 2026,
+      "rating": 3
+    },
+    {
+      "title": "The Lego Movie 2: The Second Part",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/2/0/5/1/1/4/205114-the-lego-movie-2-the-second-part-0-600-0-900-crop.jpg?v=11598317bd",
+      "url": "https://letterboxd.com/film/the-lego-movie-2-the-second-part/",
+      "date": "2026-07-05T00:00:00.000Z",
+      "year": 2019,
+      "rating": 3
+    },
+    {
+      "title": "The Thing",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/sm/upload/t3/qn/vs/p5/s5fH3GqFcHbi2F0NSBSh4KRNTc0-0-600-0-900-crop.jpg?v=01880125bb",
+      "url": "https://letterboxd.com/film/the-thing/",
+      "date": "2026-07-01T00:00:00.000Z",
+      "year": 1982,
+      "rating": 5
+    },
+    {
+      "title": "Commando",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/4/5/7/0/3/45703-commando-0-600-0-900-crop.jpg?v=82ebc01d48",
+      "url": "https://letterboxd.com/film/commando/",
+      "date": "2026-06-22T00:00:00.000Z",
+      "year": 1985,
+      "rating": 4
+    },
+    {
+      "title": "Designing Machine Learning Systems: An Iterative Process for Production-Ready Applications",
+      "type": "book",
+      "imageUrl": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1653945265l/60715378.jpg",
+      "url": "https://www.goodreads.com/book/show/60715378",
+      "date": "2026-06-21T00:00:00.000Z",
+      "year": 2022,
+      "author": "Chip Huyen"
+    },
+    {
+      "title": "No Sudden Move",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/5/7/5/0/4/3/575043-no-sudden-move-0-600-0-900-crop.jpg?v=2b10ff05ea",
+      "url": "https://letterboxd.com/film/no-sudden-move/",
+      "date": "2026-06-14T00:00:00.000Z",
+      "year": 2021,
+      "rating": 3
+    },
+    {
+      "title": "Look Back",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/1/1/2/7/6/6/9/1127669-look-back-0-600-0-900-crop.jpg?v=6a67407577",
+      "url": "https://letterboxd.com/film/look-back-2024/",
+      "date": "2026-06-12T00:00:00.000Z",
+      "year": 2024,
+      "rating": 5
+    },
+    {
+      "title": "The Princess Bride",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/sm/upload/hk/2u/bd/9p/gpxjoE0yvRwIhFEJgNArtKtaN7S-0-600-0-900-crop.jpg?v=544eada136",
+      "url": "https://letterboxd.com/film/the-princess-bride/",
+      "date": "2026-06-10T00:00:00.000Z",
+      "year": 1987,
+      "rating": 4
+    },
+    {
+      "title": "Lawrence of Arabia",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/6/0/2/9/9/60299-lawrence-of-arabia-0-600-0-900-crop.jpg?v=a3c56f9487",
+      "url": "https://letterboxd.com/film/lawrence-of-arabia/",
+      "date": "2026-05-31T00:00:00.000Z",
+      "year": 1962,
+      "rating": 5
+    },
+    {
+      "title": "Mission: Impossible – The Final Reckoning",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/5/0/3/4/0/3/503403-mission-impossible-the-final-reckoning-0-600-0-900-crop.jpg?v=00eae3744d",
+      "url": "https://letterboxd.com/film/mission-impossible-the-final-reckoning/",
+      "date": "2026-05-16T00:00:00.000Z",
+      "year": 2025,
+      "rating": 3
+    },
+    {
+      "title": "The Drama",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/1/2/0/5/4/9/4/1205494-the-drama-0-600-0-900-crop.jpg?v=2320acafd5",
+      "url": "https://letterboxd.com/film/the-drama/",
+      "date": "2026-05-13T00:00:00.000Z",
+      "year": 2026,
+      "rating": 4
+    },
+    {
+      "title": "The Devil Wears Prada",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/5/1/7/1/2/51712-the-devil-wears-prada-0-600-0-900-crop.jpg?v=65a9cdb330",
+      "url": "https://letterboxd.com/film/the-devil-wears-prada/",
+      "date": "2026-05-09T00:00:00.000Z",
+      "year": 2006,
+      "rating": 3
+    },
+    {
+      "title": "Mean Girls",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/4/6/0/4/9/46049-mean-girls-0-600-0-900-crop.jpg?v=e6378abb7b",
+      "url": "https://letterboxd.com/film/mean-girls/",
+      "date": "2026-05-08T00:00:00.000Z",
+      "year": 2004,
+      "rating": 4
+    },
+    {
+      "title": "Fantastic Mr. Fox",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/4/6/3/4/4/46344-fantastic-mr-fox-0-600-0-900-crop.jpg?v=3a2a858065",
+      "url": "https://letterboxd.com/film/fantastic-mr-fox/",
+      "date": "2026-05-04T00:00:00.000Z",
+      "year": 2009,
+      "rating": 4
+    },
+    {
+      "title": "Wake Up Dead Man",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/7/2/9/1/1/3/729113-wake-up-dead-man-0-600-0-900-crop.jpg?v=85f3366617",
+      "url": "https://letterboxd.com/film/wake-up-dead-man/",
+      "date": "2026-05-01T00:00:00.000Z",
+      "year": 2025,
+      "rating": 3
+    },
+    {
+      "title": "War Dogs",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/sm/upload/7b/d2/2z/ef/aqhAqttDq7zgsTaBHtCD8wmTk6k-0-600-0-900-crop.jpg?v=b1d4ca3acb",
+      "url": "https://letterboxd.com/film/war-dogs-2016/",
+      "date": "2026-04-27T00:00:00.000Z",
+      "year": 2016,
+      "rating": 3
+    },
+    {
+      "title": "Austin Powers: International Man of Mystery",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/5/1/3/3/6/51336-austin-powers-international-man-of-mystery-0-600-0-900-crop.jpg?v=b24eda4ee9",
+      "url": "https://letterboxd.com/film/austin-powers-international-man-of-mystery/",
+      "date": "2026-04-25T00:00:00.000Z",
+      "year": 1997,
+      "rating": 3
+    },
+    {
+      "title": "One Child Nation",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/4/9/4/7/2/8/494728-one-child-nation-0-600-0-900-crop.jpg?v=b0867565ed",
+      "url": "https://letterboxd.com/film/one-child-nation/",
+      "date": "2026-04-22T00:00:00.000Z",
+      "year": 2019,
+      "rating": 3
+    },
+    {
+      "title": "American Fiction",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/9/5/2/8/1/2/952812-american-fiction-0-600-0-900-crop.jpg?v=fbc2c6daf1",
+      "url": "https://letterboxd.com/film/american-fiction/",
+      "date": "2026-04-12T00:00:00.000Z",
+      "year": 2023,
+      "rating": 4
+    },
+    {
+      "title": "The Zone of Interest",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/3/9/8/8/0/0/398800-the-zone-of-interest-0-600-0-900-crop.jpg?v=0514f658e1",
+      "url": "https://letterboxd.com/film/the-zone-of-interest/",
+      "date": "2026-04-06T00:00:00.000Z",
+      "year": 2023,
+      "rating": 5
+    },
+    {
+      "title": "The Killer",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/4/5/8/5/0/45850-the-killer-0-600-0-900-crop.jpg?v=d65baa059e",
+      "url": "https://letterboxd.com/film/the-killer/",
+      "date": "2026-04-04T00:00:00.000Z",
+      "year": 1989,
+      "rating": 4
+    },
+    {
+      "title": "The Wager: A Tale of Shipwreck, Mutiny and Murder",
+      "type": "book",
+      "imageUrl": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1659407155l/61714633.jpg",
+      "url": "https://www.goodreads.com/book/show/61714633",
+      "date": "2026-04-03T00:00:00.000Z",
+      "year": 2023,
+      "author": "David Grann"
+    },
+    {
+      "title": "Project Hail Mary",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/6/1/1/2/8/8/611288-project-hail-mary-0-600-0-900-crop.jpg?v=ac31b6ec03",
+      "url": "https://letterboxd.com/film/project-hail-mary/",
+      "date": "2026-03-30T00:00:00.000Z",
+      "year": 2026,
+      "rating": 3
+    },
+    {
+      "title": "Badlands",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/4/9/8/4/4/49844-badlands-0-600-0-900-crop.jpg?v=d57e83e76f",
+      "url": "https://letterboxd.com/film/badlands/",
+      "date": "2026-03-23T00:00:00.000Z",
+      "year": 1973,
+      "rating": 4
+    },
+    {
+      "title": "Breakneck: China's Quest to Engineer the Future",
+      "type": "book",
+      "imageUrl": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1765233885l/223736214._SY475_.jpg",
+      "url": "https://www.goodreads.com/book/show/223736214",
+      "date": "2026-03-21T00:00:00.000Z",
+      "year": 2025,
+      "author": "Dan  Wang"
+    },
+    {
+      "title": "Dune: Part Two",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/6/1/7/4/4/3/617443-dune-part-two-0-600-0-900-crop.jpg?v=cc533700f8",
+      "url": "https://letterboxd.com/film/dune-part-two/",
+      "date": "2026-03-20T00:00:00.000Z",
+      "year": 2024,
+      "rating": 5
+    },
+    {
+      "title": "Dune",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/sm/upload/nx/8b/vs/gc/cDbNAY0KM84cxXhmj8f0dLWza3t-0-600-0-900-crop.jpg?v=49eed12751",
+      "url": "https://letterboxd.com/film/dune-2021/",
+      "date": "2026-03-20T00:00:00.000Z",
+      "year": 2021,
+      "rating": 5
+    },
+    {
+      "title": "A Real Pain",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/9/1/3/2/5/8/913258-a-real-pain-0-600-0-900-crop.jpg?v=893a943872",
+      "url": "https://letterboxd.com/film/a-real-pain/",
+      "date": "2026-03-17T00:00:00.000Z",
+      "year": 2024,
+      "rating": 4
+    },
+    {
+      "title": "Hard Boiled",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/4/5/0/1/3/45013-hard-boiled-0-600-0-900-crop.jpg?v=4bc5621882",
+      "url": "https://letterboxd.com/film/hard-boiled/",
+      "date": "2026-03-14T00:00:00.000Z",
+      "year": 1992,
+      "rating": 5
+    },
+    {
+      "title": "Hamnet",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/7/7/2/2/3/2/772232-hamnet-0-600-0-900-crop.jpg?v=631489314d",
+      "url": "https://letterboxd.com/film/hamnet/",
+      "date": "2026-03-08T00:00:00.000Z",
+      "year": 2025,
+      "rating": 4
+    },
+    {
+      "title": "Police Story",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/4/7/3/8/8/47388-police-story-0-600-0-900-crop.jpg?v=a82a2d381f",
+      "url": "https://letterboxd.com/film/police-story/",
+      "date": "2026-03-03T00:00:00.000Z",
+      "year": 1985,
+      "rating": 4
+    },
+    {
+      "title": "Alien: Romulus",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/8/5/0/4/5/9/850459-alien-romulus-0-600-0-900-crop.jpg?v=acabb7fd83",
+      "url": "https://letterboxd.com/film/alien-romulus/",
+      "date": "2026-02-28T00:00:00.000Z",
+      "year": 2024,
+      "rating": 4
+    },
+    {
+      "title": "One Battle After Another",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/9/5/1/2/7/7/951277-one-battle-after-another-0-600-0-900-crop.jpg?v=d27c4cc662",
+      "url": "https://letterboxd.com/film/one-battle-after-another/",
+      "date": "2026-02-16T00:00:00.000Z",
+      "year": 2025,
+      "rating": 5
+    },
+    {
+      "title": "Marty Supreme",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/1/1/9/7/4/9/9/1197499-marty-supreme-0-600-0-900-crop.jpg?v=b14a26bb43",
+      "url": "https://letterboxd.com/film/marty-supreme/",
+      "date": "2026-02-12T00:00:00.000Z",
+      "year": 2025,
+      "rating": 5
+    },
+    {
+      "title": "Marty Supreme",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/1/1/9/7/4/9/9/1197499-marty-supreme-0-600-0-900-crop.jpg?v=b14a26bb43",
+      "url": "https://letterboxd.com/film/marty-supreme/",
+      "date": "2026-02-04T00:00:00.000Z",
+      "year": 2025,
+      "rating": 5
+    },
+    {
+      "title": "Air",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/8/6/8/4/9/1/868491-air-0-600-0-900-crop.jpg?v=0dddab89c6",
+      "url": "https://letterboxd.com/film/air-2023/",
+      "date": "2026-02-02T00:00:00.000Z",
+      "year": 2023,
+      "rating": 3
+    },
+    {
+      "title": "Sentimental Value",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/film-poster/1/0/1/3/3/5/7/1013357-sentimental-value-2025-0-600-0-900-crop.jpg?v=e89e64a309",
+      "url": "https://letterboxd.com/film/sentimental-value-2025/",
+      "date": "2026-01-19T00:00:00.000Z",
+      "year": 2025,
+      "rating": 4
+    },
+    {
+      "title": "The Lord of the Rings: The Return of the King",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/sm/upload/zs/nt/u4/uz/xieWkPAgQrrk5wOyncayPd65hrp-0-600-0-900-crop.jpg?v=4c89d05285",
+      "url": "https://letterboxd.com/film/the-lord-of-the-rings-the-return-of-the-king/",
+      "date": "2026-01-16T00:00:00.000Z",
+      "year": 2003,
+      "rating": 5
+    },
+    {
+      "title": "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
+      "type": "book",
+      "imageUrl": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1501626846l/23466395.jpg",
+      "url": "https://www.goodreads.com/book/show/23466395",
+      "date": "2026-01-04T00:00:00.000Z",
+      "year": 2015,
+      "author": "Martin Kleppmann"
+    },
+    {
+      "title": "Blood Over Bright Haven",
+      "type": "book",
+      "imageUrl": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1733659906l/222369481._SY475_.jpg",
+      "url": "https://www.goodreads.com/book/show/222369481",
+      "date": "2025-11-24T00:00:00.000Z",
+      "year": 2023,
+      "author": "M.L. Wang"
+    },
+    {
+      "title": "Skunk Works: A Personal Memoir of My Years at Lockheed",
+      "type": "book",
+      "imageUrl": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1592881648l/54124147.jpg",
+      "url": "https://www.goodreads.com/book/show/54124147",
+      "date": "2025-11-22T00:00:00.000Z",
+      "year": 1994,
+      "author": "Ben R. Rich"
+    },
+    {
+      "title": "Norse Mythology",
+      "type": "book",
+      "imageUrl": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1656684690l/30809689._SY475_.jpg",
+      "url": "https://www.goodreads.com/book/show/30809689",
+      "date": "2025-10-26T00:00:00.000Z",
+      "year": 2017,
+      "author": "Neil Gaiman"
+    },
+    {
+      "title": "Talking to My Daughter about the Economy: A Brief History of Capitalism",
+      "type": "book",
+      "imageUrl": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1521414387l/36992441._SY475_.jpg",
+      "url": "https://www.goodreads.com/book/show/36992441",
+      "date": "2025-10-25T00:00:00.000Z",
+      "year": 2013,
+      "author": "Yanis Varoufakis"
+    },
+    {
+      "title": "Little Fockers",
+      "type": "film",
+      "imageUrl": "https://a.ltrbxd.com/resized/sm/upload/ld/2u/bc/8p/qsumvJX3GHfGeQOzTGlJfZJNEaW-0-600-0-900-crop.jpg?v=14c8757e6a",
+      "url": "https://letterboxd.com/film/little-fockers/",
+      "date": "2025-04-04T00:00:00.000Z",
+      "year": 2010,
+      "rating": 2
+    },
+    {
+      "title": "11/22/63",
+      "type": "book",
+      "imageUrl": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1327876792l/10644930.jpg",
+      "url": "https://www.goodreads.com/book/show/10644930",
+      "date": "2022-04-11T00:00:00.000Z",
+      "year": 2011,
+      "author": "Stephen  King"
+    }
+  ]
+}

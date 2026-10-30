@@ -1,5 +1,8 @@
-import { mkdir, rename, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const fallbackPath = fileURLToPath(new URL("./shelf-fallback.json", import.meta.url));
 
 const LETTERBOXD_RSS = "https://letterboxd.com/miscerable/rss/";
 const GOODREADS_RSS =
@@ -52,7 +55,11 @@ async function fetchXml(url) {
     throw new Error(`request failed: ${response.status} ${url}`);
   }
 
-  return response.text();
+  const xml = await response.text();
+  if (!/<rss(?:\s|>)/i.test(xml) || !/<channel(?:\s|>)/i.test(xml)) {
+    throw new Error(`invalid RSS response: ${new URL(url).hostname}`);
+  }
+  return xml;
 }
 
 async function fetchLetterboxd() {
@@ -136,16 +143,32 @@ async function fetchGoodreads() {
   return items;
 }
 
-export async function fetchShelfSnapshot() {
-  const [films, books] = await Promise.all([fetchLetterboxd(), fetchGoodreads()]);
-
-  const items = [...films, ...books].sort(
+export async function fetchShelfSnapshot(previous = { items: [] }) {
+  const results = await Promise.allSettled([fetchLetterboxd(), fetchGoodreads()]);
+  const types = ["film", "book"];
+  const errors = [];
+  const items = results.flatMap((result, index) => {
+    if (result.status === "fulfilled") return result.value;
+    const source = types[index];
+    const message = result.reason instanceof Error ? result.reason.message : String(result.reason);
+    console.error(`shelf ${source} refresh failed; retaining previous items`, message);
+    errors.push({ source, message });
+    return previous.items.filter((item) => item.type === source);
+  }).sort(
     (left, right) => new Date(right.date).getTime() - new Date(left.date).getTime()
   );
 
   return {
-    generatedAt: new Date().toISOString(),
+    generatedAt: results.every((result) => result.status === "rejected")
+      ? previous.generatedAt ?? null
+      : new Date().toISOString(),
     items,
+    refreshedAt: Object.fromEntries(results.map((result, index) => [
+      types[index],
+      result.status === "fulfilled" ? new Date().toISOString()
+        : previous.refreshedAt?.[types[index]] ?? previous.generatedAt ?? null,
+    ])),
+    errors,
   };
 }
 
@@ -158,14 +181,24 @@ async function writeJsonFile(filePath, data) {
   await rename(tempPath, filePath);
 }
 
+async function readSnapshot(filePaths) {
+  for (const filePath of [...filePaths, fallbackPath]) {
+    try {
+      const snapshot = JSON.parse(await readFile(filePath, "utf8"));
+      if (Array.isArray(snapshot.items)) return snapshot;
+    } catch (error) {
+      if (error.code !== "ENOENT") console.warn(`cannot read shelf fallback: ${filePath}`, error.message);
+    }
+  }
+  return { items: [] };
+}
+
 export async function refreshShelfFile(filePath) {
-  const snapshot = await fetchShelfSnapshot();
-  await writeJsonFile(filePath, snapshot);
-  return snapshot;
+  return refreshShelfFiles([filePath]);
 }
 
 export async function refreshShelfFiles(filePaths) {
-  const snapshot = await fetchShelfSnapshot();
+  const snapshot = await fetchShelfSnapshot(await readSnapshot(filePaths));
   await Promise.all(filePaths.map((filePath) => writeJsonFile(filePath, snapshot)));
   return snapshot;
 }
