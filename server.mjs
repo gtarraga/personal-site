@@ -1,4 +1,6 @@
 import http from "node:http";
+import { readFile } from "node:fs/promises";
+import { shelfHealth } from "./scripts/shelf-health.mjs";
 import path from "node:path";
 import { Readable } from "node:stream";
 import { fileURLToPath } from "node:url";
@@ -93,6 +95,19 @@ async function proxyRelay(request, response) {
 
 http
   .createServer((request, response) => {
+    if (request.url?.split("?")[0] === "/health/shelf") {
+      readFile(path.join(distDir, "shelf.json"), "utf8")
+        .then((content) => shelfHealth(JSON.parse(content)))
+        .catch(() => ({ ok: false, errors: [{ message: "shelf snapshot unavailable" }] }))
+        .then((health) => {
+          response.writeHead(health.ok ? 200 : 503, {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+          });
+          response.end(JSON.stringify(health));
+        });
+      return;
+    }
     if (request.url?.startsWith("/relay/")) {
       proxyRelay(request, response);
       return;
