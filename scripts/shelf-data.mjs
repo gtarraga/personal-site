@@ -1,7 +1,7 @@
 import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { GOODREADS_WIDGET, parseGoodreadsWidget, withExactReadingDates } from "./goodreads-widget.mjs";
+import { GOODREADS_WIDGET, parseGoodreadsWidget } from "./goodreads-widget.mjs";
 
 const fallbackPath = fileURLToPath(new URL("./shelf-fallback.json", import.meta.url));
 
@@ -105,16 +105,25 @@ async function fetchLetterboxd() {
   return items;
 }
 
-async function fetchGoodreads() {
+async function fetchGoodreads(previousItems) {
   const [source, saved] = await Promise.all([
     fetchShelfText(GOODREADS_WIDGET),
     readFile(goodreadsBooksPath, "utf8").then(JSON.parse),
   ]);
-  return withExactReadingDates(parseGoodreadsWidget(source), saved.books);
+  // The manifest is a historical seed only; new books need no manual date sync.
+  const dates = new Map([
+    ...saved.books,
+    ...previousItems.filter((item) => item.type === "book"),
+  ].map((book) => [book.reviewId ?? book.url, book]));
+  const today = `${new Date().toISOString().slice(0, 10)}T00:00:00.000Z`;
+  return parseGoodreadsWidget(source).map((book) => {
+    const previous = dates.get(book.reviewId) ?? dates.get(book.url);
+    return { ...book, date: previous?.date ?? today, year: previous?.year };
+  });
 }
 
 export async function fetchShelfSnapshot(previous = { items: [] }) {
-  const results = await Promise.allSettled([fetchLetterboxd(), fetchGoodreads()]);
+  const results = await Promise.allSettled([fetchLetterboxd(), fetchGoodreads(previous.items)]);
   const types = ["film", "book"];
   const errors = [];
   const items = results.flatMap((result, index) => {

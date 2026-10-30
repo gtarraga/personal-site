@@ -2,6 +2,7 @@
 dist/
 src/generated/
 public/shelf.json
+/data/
 
 # generated types
 .astro/

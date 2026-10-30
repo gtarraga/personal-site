@@ -5,31 +5,38 @@ A personal website built with Astro. Definitely overkill for a simple HTML but I
 ## Goodreads shelf sync
 
 Book membership, titles, authors, covers, and ratings come from Goodreads' public
-`custom_widget` for the `site` shelf. Reading dates come from
-`scripts/goodreads-books.json`, keyed by Goodreads review ID. The widget does not
-provide reading dates, so these are verified against the signed-in Goodreads
-shelf's **Date Read** column. Activity dates and date-added values are never used
-as substitutes. A blank Date Read is recorded as `null` and omitted from the
-rendered shelf, matching the old RSS behavior.
+`custom_widget` for the `site` shelf. The Node server refreshes the shelf on
+startup and every 24 hours, including Letterboxd. No login, browser automation,
+Codex, Orion, or additional service is needed. Pages keep using the small local
+`/shelf.json` snapshot; visitors never request Goodreads directly.
 
-The Codex chat's six-hour automation checks the signed-in shelf in Orion. It must
-load every row, confirm the loaded count matches the shelf count, and record
-`[{"title":"Book title","dateRead":"2026-06-21"}]` in a scratch JSON file (`null`
-for an explicitly blank Date Read). Then run:
+The widget does not expose reading dates. Existing dates and publication years
+are preserved, with `scripts/goodreads-books.json` retained only as a historical
+seed. New books use the UTC day they are first observed, not an exact Date Read.
+That date stays fixed on subsequent refreshes, even if the title or rating changes.
+Books first observed on the same day keep the widget's relative order. Adding an
+older book to the `site` shelf will therefore make it appear recent. Books without
+a Goodreads Date Read are now included too.
 
-```sh
-node scripts/sync-goodreads-dates.mjs /absolute/path/to/readings.json
+The last snapshot is saved atomically to `data/shelf.json` (override with
+`SHELF_DATA_PATH`) and copied to `dist/shelf.json` for serving. **Mount a named
+volume or persistent directory at `/app/data` in Docker** so first-seen dates
+survive container replacement, not just process restarts. For example, add this
+to the existing Compose service and top-level volumes:
+
+```yaml copy Copy Volume Configuration
+services:
+  website:
+    # Keep the existing image, ports, and other settings.
+    volumes:
+      - shelf-data:/app/data
+
+volumes:
+  shelf-data:
 ```
 
-The command checks the complete input against the live public widget, validates
-calendar dates, and updates the date manifest and baked fallback only when data
-changes. Commit those two files, run the tests/build, publish the image, update
-the pinned digest in the homelab deployment, and verify `/health/shelf`.
-
-The public widget can remove books without a browser sync. New books require an
-exact date from the browser sync before replacing the previous book snapshot.
-Missing dates, malformed markup, or a potentially truncated widget produce an
-unhealthy book source without blocking films. The monitor should report browser
-sign-in/access failures when exact-date syncing cannot run. Exact-date changes
-require Codex to be running with access to the signed-in browser; no Goodreads
-account credentials are stored on the website server.
+On the first run, the server seeds its state from the built snapshot or baked
+fallback. Removed books disappear on the next successful refresh. Failed fetches,
+malformed markup, or a potentially truncated widget retain the previous books
+without blocking film updates; `/health/shelf` reports errors and stale sources.
+The old Codex/Orion automation can be disabled; no manual date-sync step remains.

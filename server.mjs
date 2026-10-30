@@ -5,11 +5,13 @@ import path from "node:path";
 import { Readable } from "node:stream";
 import { fileURLToPath } from "node:url";
 import handler from "serve-handler";
-import { refreshShelfFile } from "./scripts/shelf-data.mjs";
+import { refreshShelfFiles } from "./scripts/shelf-data.mjs";
 
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.join(rootDir, "dist");
 const port = Number.parseInt(process.env.PORT || "8080", 10);
+const shelfDataPath = process.env.SHELF_DATA_PATH || path.join(rootDir, "data", "shelf.json");
+const SHELF_REFRESH_MS = 24 * 60 * 60 * 1000;
 
 const POSTHOG_ASSETS_HOST = "https://eu-assets.i.posthog.com";
 const POSTHOG_API_HOST = "https://eu.i.posthog.com";
@@ -36,12 +38,17 @@ function readRequestBody(request) {
   });
 }
 
-try {
-  const snapshot = await refreshShelfFile(path.join(distDir, "shelf.json"));
-  console.log(`shelf refreshed on boot: ${snapshot.items.length} items`);
-} catch (error) {
-  console.warn("shelf refresh failed on boot, using baked fallback", error);
+async function refreshShelf() {
+  try {
+    const snapshot = await refreshShelfFiles([shelfDataPath, path.join(distDir, "shelf.json")]);
+    console.log(`shelf refreshed: ${snapshot.items.length} items`);
+  } catch (error) {
+    console.warn("shelf refresh failed, using previous snapshot", error);
+  }
 }
+
+await refreshShelf();
+setInterval(refreshShelf, SHELF_REFRESH_MS).unref();
 
 async function proxyRelay(request, response) {
   const url = request.url ?? "/";

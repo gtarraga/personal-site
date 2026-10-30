@@ -19,7 +19,7 @@ test("normalizeLetterboxdUrl leaves canonical film url alone", () => {
 import { mkdtemp, readFile, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { refreshShelfFile } from "./shelf-data.mjs";
+import { refreshShelfFile, refreshShelfFiles } from "./shelf-data.mjs";
 
 const filmFeed = `<rss><channel><item><letterboxd:filmTitle>The Master</letterboxd:filmTitle><letterboxd:watchedDate>2026-10-22</letterboxd:watchedDate><link>https://letterboxd.com/miscerable/film/the-master-2012/</link></item></channel></rss>`;
 function widget(html) {
@@ -30,6 +30,50 @@ const bookFeed = emptyBookFeed.replace('</div>', '<div class="gr_custom_each_con
 
 const oldBook = { title: "Previous book", type: "book", date: "2026-01-01T00:00:00.000Z" };
 const oldFilm = { title: "Previous film", type: "film", date: "2026-01-02T00:00:00.000Z" };
+
+test("new books retain their first-seen day across refreshes and rebuilt public snapshots", async (t) => {
+  const dir = await mkdtemp(path.join(tmpdir(), "shelf-test-"));
+  t.after(() => rm(dir, { recursive: true, force: true }));
+  const file = path.join(dir, "shelf.json");
+  const publicFile = path.join(dir, "public", "shelf.json");
+  t.mock.timers.enable({ apis: ["Date"], now: Date.parse("2026-10-30T23:45:00Z") });
+  let feed = bookFeed.replace("8704336991", "9999999999");
+  t.mock.method(globalThis, "fetch", async (url) => new Response(
+    url.includes("goodreads") ? feed : filmFeed));
+
+  const first = await refreshShelfFiles([file, publicFile]);
+  const book = first.items.find((item) => item.type === "book");
+  assert.equal(book.reviewId, "9999999999");
+  assert.equal(book.date, "2026-10-30T00:00:00.000Z");
+  assert.deepEqual(first.errors, []);
+
+  t.mock.timers.tick(24 * 60 * 60 * 1000);
+  feed = feed.replace("New book", "Updated book title");
+  await writeFile(publicFile, JSON.stringify({ items: [] }));
+  const second = await refreshShelfFiles([file, publicFile]);
+  const updated = second.items.find((item) => item.type === "book");
+  assert.equal(updated.title, "Updated book title");
+  assert.equal(updated.date, book.date);
+  assert.deepEqual(second.errors, []);
+  assert.deepEqual(JSON.parse(await readFile(publicFile, "utf8")),
+    JSON.parse(await readFile(file, "utf8")));
+});
+
+test("upgrading a snapshot without review IDs preserves its dates and publication years", async (t) => {
+  const dir = await mkdtemp(path.join(tmpdir(), "shelf-test-"));
+  t.after(() => rm(dir, { recursive: true, force: true }));
+  const file = path.join(dir, "shelf.json");
+  await writeFile(file, JSON.stringify({ items: [{
+    ...oldBook, url: "https://www.goodreads.com/book/show/123", year: 1994,
+  }] }));
+  t.mock.method(globalThis, "fetch", async (url) => new Response(
+    url.includes("goodreads") ? bookFeed.replace("8704336991", "9999999999") : filmFeed));
+  const snapshot = await refreshShelfFile(file);
+  const book = snapshot.items.find((item) => item.type === "book");
+  assert.equal(book.date, oldBook.date);
+  assert.equal(book.year, 1994);
+  assert.deepEqual(snapshot.errors, []);
+});
 
 for (const failedSource of ["book", "film", "both"]) {
   test(`refresh preserves only failed sources (${failedSource})`, async (t) => {

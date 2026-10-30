@@ -43,15 +43,3 @@ export function parseGoodreadsWidget(source) {
     };
   }).get();
 }
-
-export function withExactReadingDates(books, savedBooks) {
-  const dates = new Map(savedBooks.map((book) => [book.reviewId, book]));
-  return books.flatMap((book) => {
-    const saved = dates.get(book.reviewId);
-    if (!saved || !("date" in saved)) throw new Error(`Exact Goodreads reading date needs syncing: ${book.title} (review ${book.reviewId})`);
-    // A blank Date Read on Goodreads remains undated and is omitted, as with RSS.
-    if (saved.date === null) return [];
-    if (!/^\d{4}-\d{2}-\d{2}T00:00:00\.000Z$/.test(saved.date) || !Number.isFinite(Date.parse(saved.date)) || new Date(saved.date).toISOString() !== saved.date) throw new Error(`Invalid saved Goodreads reading date: ${book.reviewId}`);
-    return [{ ...book, date: saved.date, year: saved.year }];
-  });
-}
