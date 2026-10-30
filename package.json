@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "astro": "^5.14.8",
+    "cheerio": "1.1.2",
     "serve-handler": "^6.1.7"
   }
 }
