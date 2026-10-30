@@ -1,4 +1,4 @@
-import { load } from "cheerio";
+import { load } from "cheerio/slim";
 
 export const GOODREADS_WIDGET = "https://www.goodreads.com/review/custom_widget/49366915.site?shelf=site&num_books=100&sort=date_read&order=d";
 
