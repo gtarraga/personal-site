@@ -1,12 +1,12 @@
 import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { GOODREADS_WIDGET, parseGoodreadsWidget, withExactReadingDates } from "./goodreads-widget.mjs";
 
 const fallbackPath = fileURLToPath(new URL("./shelf-fallback.json", import.meta.url));
 
 const LETTERBOXD_RSS = "https://letterboxd.com/miscerable/rss/";
-const GOODREADS_RSS =
-  "https://www.goodreads.com/review/list_rss/49366915?shelf=site";
+const goodreadsBooksPath = new URL("./goodreads-books.json", import.meta.url);
 
 function extractImageFromCDATA(description) {
   const match = /src="([^"]+)"/.exec(description);
@@ -43,7 +43,7 @@ export function normalizeLetterboxdUrl(url) {
 
 const FETCH_TIMEOUT_MS = 8000;
 
-async function fetchXml(url) {
+export async function fetchShelfText(url) {
   const response = await fetch(url, {
     headers: {
       "user-agent": "gtarraga.com shelf refresh",
@@ -55,7 +55,11 @@ async function fetchXml(url) {
     throw new Error(`request failed: ${response.status} ${url}`);
   }
 
-  const xml = await response.text();
+  return response.text();
+}
+
+async function fetchXml(url) {
+  const xml = await fetchShelfText(url);
   if (!/<rss(?:\s|>)/i.test(xml) || !/<channel(?:\s|>)/i.test(xml)) {
     throw new Error(`invalid RSS response: ${new URL(url).hostname}`);
   }
@@ -102,45 +106,11 @@ async function fetchLetterboxd() {
 }
 
 async function fetchGoodreads() {
-  const xml = await fetchXml(GOODREADS_RSS);
-  const items = [];
-  const itemRegex = /<item>([\s\S]*?)<\/item>/g;
-  let match = itemRegex.exec(xml);
-
-  while (match !== null) {
-    const itemXml = match[1];
-    const title = getCDATA(itemXml, "title") || getTag(itemXml, "title");
-    const authorName = getTag(itemXml, "author_name");
-    const imageUrl = getCDATA(itemXml, "book_large_image_url");
-    const bookId = getTag(itemXml, "book_id");
-    const userReadAt = getCDATA(itemXml, "user_read_at");
-    const userRating = getTag(itemXml, "user_rating");
-    const bookPublished = getTag(itemXml, "book_published");
-
-    if (title && userReadAt && bookId) {
-      const date = new Date(userReadAt);
-
-      if (!Number.isNaN(date.getTime())) {
-        items.push({
-          title,
-          type: "book",
-          imageUrl: imageUrl || "",
-          url: `https://www.goodreads.com/book/show/${bookId}`,
-          date: date.toISOString(),
-          year: bookPublished ? Number.parseInt(bookPublished, 10) : undefined,
-          rating:
-            userRating && userRating !== "0"
-              ? Number.parseInt(userRating, 10)
-              : undefined,
-          author: authorName || undefined,
-        });
-      }
-    }
-
-    match = itemRegex.exec(xml);
-  }
-
-  return items;
+  const [source, saved] = await Promise.all([
+    fetchShelfText(GOODREADS_WIDGET),
+    readFile(goodreadsBooksPath, "utf8").then(JSON.parse),
+  ]);
+  return withExactReadingDates(parseGoodreadsWidget(source), saved.books);
 }
 
 export async function fetchShelfSnapshot(previous = { items: [] }) {

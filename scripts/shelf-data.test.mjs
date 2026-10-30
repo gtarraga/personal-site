@@ -22,7 +22,12 @@ import path from "node:path";
 import { refreshShelfFile } from "./shelf-data.mjs";
 
 const filmFeed = `<rss><channel><item><letterboxd:filmTitle>The Master</letterboxd:filmTitle><letterboxd:watchedDate>2026-10-22</letterboxd:watchedDate><link>https://letterboxd.com/miscerable/film/the-master-2012/</link></item></channel></rss>`;
-const bookFeed = `<rss><channel><item><title><![CDATA[New book]]></title><book_id>123</book_id><user_read_at><![CDATA[2026-10-23]]></user_read_at></item></channel></rss>`;
+function widget(html) {
+  return "var widget_code = '" + html.replace(/\\/g, "\\\\").replace(/'/g, "\\'") + "';";
+}
+const emptyBookFeed = widget('<div class="gr_custom_container_"><h2 class="gr_custom_header_"><a href="https://www.goodreads.com/review/list/49366915?shelf=site">site</a></h2></div>');
+const bookFeed = emptyBookFeed.replace('</div>', '<div class="gr_custom_each_container_"><div class="gr_custom_title_"><a href="https://www.goodreads.com/review/show/8704336991">New book</a></div><div class="gr_custom_book_container_"><img src="https://i.gr-assets.com/images/books/123.jpg"></div></div></div>');
+
 const oldBook = { title: "Previous book", type: "book", date: "2026-01-01T00:00:00.000Z" };
 const oldFilm = { title: "Previous film", type: "film", date: "2026-01-02T00:00:00.000Z" };
 
@@ -56,7 +61,7 @@ test("a successful empty feed removes previous items for that source", async (t)
   const file = path.join(dir, "shelf.json");
   await writeFile(file, JSON.stringify({ items: [oldBook, oldFilm] }));
   t.mock.method(globalThis, "fetch", async (url) => new Response(
-    url.includes("goodreads") ? "<rss><channel></channel></rss>" : filmFeed));
+    url.includes("goodreads") ? emptyBookFeed : filmFeed));
   const snapshot = await refreshShelfFile(file);
   assert.equal(snapshot.items.some((item) => item.type === "book"), false);
 });

@@ -1,0 +1,58 @@
+{
+  "books": [
+    {
+      "reviewId": "8704336991",
+      "title": "Designing Machine Learning Systems: An Iterative Process for Production-Ready Applications",
+      "date": "2026-06-21T00:00:00.000Z",
+      "year": 2022
+    },
+    {
+      "reviewId": "8491525224",
+      "title": "The Wager: A Tale of Shipwreck, Mutiny and Murder",
+      "date": "2026-04-03T00:00:00.000Z",
+      "year": 2023
+    },
+    {
+      "reviewId": "8455836761",
+      "title": "Breakneck: China's Quest to Engineer the Future",
+      "date": "2026-03-21T00:00:00.000Z",
+      "year": 2025
+    },
+    {
+      "reviewId": "8221986948",
+      "title": "Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
+      "date": "2026-01-04T00:00:00.000Z",
+      "year": 2015
+    },
+    {
+      "reviewId": "8175090250",
+      "title": "Blood Over Bright Haven",
+      "date": "2025-11-24T00:00:00.000Z",
+      "year": 2023
+    },
+    {
+      "reviewId": "8175089474",
+      "title": "Skunk Works: A Personal Memoir of My Years at Lockheed",
+      "date": "2025-11-22T00:00:00.000Z",
+      "year": 1994
+    },
+    {
+      "reviewId": "3510573737",
+      "title": "Norse Mythology",
+      "date": "2025-10-26T00:00:00.000Z",
+      "year": 2017
+    },
+    {
+      "reviewId": "8175087297",
+      "title": "Talking to My Daughter about the Economy: A Brief History of Capitalism",
+      "date": "2025-10-25T00:00:00.000Z",
+      "year": 2013
+    },
+    {
+      "reviewId": "3532789011",
+      "title": "11/22/63",
+      "date": "2022-04-11T00:00:00.000Z",
+      "year": 2011
+    }
+  ]
+}
